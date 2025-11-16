@@ -324,7 +324,7 @@ export default function Configurator() {
   return (
     <section
       id="configurator"
-      className="py-20 md:py-32 relative overflow-hidden min-h-screen"
+      className="py-20 md:py-32 relative overflow-hidden"
     >
       {/* Premium background with smooth animations */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-primary-950/30 to-black" />
@@ -412,8 +412,8 @@ export default function Configurator() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {/* Left Column - Steps */}
-          <div className="lg:col-span-2">
-            <div className="relative min-h-[600px]">
+          <div className="lg:col-span-2 order-2 lg:order-1">
+            <div className="relative min-h-[500px] md:min-h-[600px]">
               {/* Step 1: Tariff Selection */}
               <div
                 className={`absolute inset-0 transition-all duration-500 ${
@@ -424,7 +424,7 @@ export default function Configurator() {
                     : "opacity-0 translate-x-full pointer-events-none"
                 } ${isTransitioning ? "transition-none" : ""}`}
               >
-                <div className="glass-effect border border-white/10 rounded-2xl p-6 md:p-8 relative overflow-hidden group/container">
+                <div className="glass-effect border border-white/10 rounded-2xl p-4 md:p-6 lg:p-8 relative overflow-hidden group/container">
                   {/* Background glow */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 via-transparent to-primary-600/5 opacity-0 group-hover/container:opacity-100 transition-opacity duration-500" />
                   
@@ -524,7 +524,7 @@ export default function Configurator() {
                     : "opacity-0 translate-x-full pointer-events-none"
                 } ${isTransitioning ? "transition-none" : ""}`}
               >
-                <div className="glass-effect border border-white/10 rounded-2xl p-6 md:p-8">
+                <div className="glass-effect border border-white/10 rounded-2xl p-4 md:p-6 lg:p-8">
                   {currentStep > 2 && (
                     <button
                       onClick={handleStepBack}
@@ -604,7 +604,7 @@ export default function Configurator() {
                     : "opacity-0 translate-x-full pointer-events-none"
                 } ${isTransitioning ? "transition-none" : ""}`}
               >
-                <div className="glass-effect border border-white/10 rounded-2xl p-6 md:p-8 lg:p-10">
+                <div className="glass-effect border border-white/10 rounded-2xl p-4 md:p-6 lg:p-8">
                   {currentStep > 3 && (
                     <button
                       onClick={handleStepBack}
@@ -706,7 +706,7 @@ export default function Configurator() {
                     : "opacity-0 translate-x-full pointer-events-none"
                 } ${isTransitioning ? "transition-none" : ""}`}
               >
-                <div className="glass-effect border border-white/10 rounded-2xl p-6 md:p-8">
+                <div className="glass-effect border border-white/10 rounded-2xl p-4 md:p-6 lg:p-8">
                   <button
                     onClick={handleStepBack}
                     className="mb-6 flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
@@ -837,21 +837,21 @@ export default function Configurator() {
           </div>
 
           {/* Right Column - Fixed Animated House & Summary */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24 space-y-6">
+          <div className="lg:col-span-1 order-1 lg:order-2">
+            <div className="lg:sticky lg:top-24 space-y-6">
               {/* Animated House */}
-              <div className="glass-effect border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col items-center relative overflow-hidden group/house">
+              <div className="glass-effect border border-white/10 rounded-2xl p-4 md:p-6 lg:p-8 flex flex-col items-center relative overflow-hidden group/house">
                 {/* Background glow */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 via-transparent to-primary-600/5 opacity-0 group-hover/house:opacity-100 transition-opacity duration-500" />
                 
-                <div className="relative w-full max-w-[280px] aspect-square mb-6 z-10">
+                <div className="relative w-full max-w-[200px] sm:max-w-[240px] lg:max-w-[280px] aspect-square mb-4 md:mb-6 z-10 mx-auto">
                   <AnimatedHouse />
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     <div className="w-full h-full rounded-full bg-primary-500/15 blur-2xl animate-pulse animate-pulse-glow" />
                     <div className="w-full h-full rounded-full bg-primary-400/10 blur-xl animate-scale-pulse" style={{ animationDelay: "1s" }} />
                   </div>
                 </div>
-                <p className="text-center text-sm text-gray-400 relative z-10">
+                <p className="text-center text-xs md:text-sm text-gray-400 relative z-10 px-2">
                   {t("config.summary.house")}
                 </p>
                 
@@ -862,7 +862,7 @@ export default function Configurator() {
               </div>
 
               {/* Summary */}
-              <div className="glass-effect border border-white/20 rounded-2xl p-6 shadow-2xl backdrop-blur-2xl relative overflow-hidden group/summary">
+              <div className="glass-effect border border-white/20 rounded-2xl p-4 md:p-6 shadow-2xl backdrop-blur-2xl relative overflow-hidden group/summary">
                 {/* Background effects */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 via-transparent to-primary-600/5 opacity-0 group-hover/summary:opacity-100 transition-opacity duration-500" />
                 <div className="absolute inset-0 opacity-0 group-hover/summary:opacity-100 transition-opacity duration-500">
@@ -870,8 +870,8 @@ export default function Configurator() {
                 </div>
                 
                 <div className="mb-4 relative z-10">
-                  <div className="text-gray-400 text-sm mb-1 font-medium">{t("config.summary.total")}</div>
-                  <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 bg-clip-text text-transparent animate-gradient">
+                  <div className="text-gray-400 text-xs md:text-sm mb-1 font-medium">{t("config.summary.total")}</div>
+                  <div className="text-2xl md:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 bg-clip-text text-transparent animate-gradient">
                     {totalPrice > 0 ? `${totalPrice.toLocaleString()} ₸` : "—"}
                   </div>
                 </div>
@@ -898,7 +898,7 @@ export default function Configurator() {
                 <button
                   onClick={handleOrder}
                   disabled={!selectedTariff || !selectedPremise || totalPrice === 0}
-                  className="w-full px-6 py-4 bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700 rounded-xl hover:from-primary-600 hover:via-primary-700 hover:to-primary-800 transition-all duration-300 font-bold text-base shadow-2xl shadow-primary-500/40 hover:shadow-primary-500/60 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden group"
+                  className="w-full px-4 md:px-6 py-3 md:py-4 bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700 rounded-xl hover:from-primary-600 hover:via-primary-700 hover:to-primary-800 transition-all duration-300 font-bold text-sm md:text-base shadow-2xl shadow-primary-500/40 hover:shadow-primary-500/60 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden group"
                 >
                   <span className="relative z-10">{t("config.order")}</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

@@ -7,6 +7,16 @@
   --foreground: #fafafa;
 }
 
+.dark {
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+}
+
+.light {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -22,6 +32,7 @@ body {
   background: var(--background);
   min-height: 100vh;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @layer utilities {
@@ -39,6 +50,11 @@ body {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .light .glass-effect {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.1);
   }
   
   .premium-glow {

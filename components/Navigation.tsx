@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const pathname = usePathname();
   const { language, setLanguage, t } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,7 +39,7 @@ export default function Navigation() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-black/90 backdrop-blur-2xl border-b border-white/10 shadow-2xl shadow-black/50"
+          ? "dark:bg-black/90 bg-white/90 backdrop-blur-2xl dark:border-white/10 border-gray-200/50 shadow-2xl dark:shadow-black/50 shadow-gray-200/50"
           : "bg-transparent"
       }`}
     >
@@ -65,29 +67,75 @@ export default function Navigation() {
             </Link>
             <Link
               href="/"
-              className="text-lg md:text-2xl font-bold bg-gradient-to-r from-primary-300 via-primary-400 to-primary-600 bg-clip-text text-transparent tracking-tight hover:opacity-80 transition-opacity"
+              className="text-lg md:text-2xl font-bold bg-gradient-to-r from-primary-300 via-primary-400 to-primary-600 bg-clip-text text-transparent tracking-tight hover:opacity-80 transition-opacity dark:text-white"
             >
               Умный Макс
             </Link>
           </div>
 
-          {/* Language Switcher */}
-          <div className="relative">
+          {/* Theme Toggle & Language Switcher */}
+          <div className="flex items-center gap-2 md:gap-3">
+            {/* Theme Toggle */}
             <button
-              onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg glass-effect border border-white/10 hover:border-primary-500/50 transition-all duration-300 text-sm font-medium"
+              onClick={toggleTheme}
+              className="relative w-10 h-10 md:w-11 md:h-11 rounded-lg glass-effect border border-white/10 hover:border-primary-500/50 transition-all duration-300 flex items-center justify-center group overflow-hidden"
+              aria-label="Toggle theme"
             >
-              <span>{language === "ru" ? "🇷🇺" : "🇰🇿"}</span>
-              <span className="hidden sm:inline">{language === "ru" ? "РУС" : "ҚАЗ"}</span>
+              {/* Background glow on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-transparent to-primary-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              {/* Sun icon (light mode) */}
               <svg
-                className={`w-4 h-4 transition-transform duration-300 ${isLanguageMenuOpen ? "rotate-180" : ""}`}
+                className={`absolute w-5 h-5 md:w-6 md:h-6 text-yellow-400 transition-all duration-500 ${
+                  theme === "light" ? "opacity-100 rotate-0 scale-100" : "opacity-0 rotate-90 scale-0"
+                }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                />
+              </svg>
+              
+              {/* Moon icon (dark mode) */}
+              <svg
+                className={`absolute w-5 h-5 md:w-6 md:h-6 text-primary-300 transition-all duration-500 ${
+                  theme === "dark" ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-0"
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                />
               </svg>
             </button>
+
+            {/* Language Switcher */}
+            <div className="relative">
+              <button
+                onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+                className="flex items-center gap-2 px-3 py-2 rounded-lg glass-effect border border-white/10 hover:border-primary-500/50 transition-all duration-300 text-sm font-medium"
+              >
+                <span>{language === "ru" ? "🇷🇺" : "🇰🇿"}</span>
+                <span className="hidden sm:inline">{language === "ru" ? "РУС" : "ҚАЗ"}</span>
+                <svg
+                  className={`w-4 h-4 transition-transform duration-300 ${isLanguageMenuOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
 
             {isLanguageMenuOpen && (
               <>
@@ -140,21 +188,21 @@ export default function Navigation() {
               <>
                 <button
                   onClick={() => scrollToSection("features")}
-                  className="relative px-4 py-2 text-gray-300 hover:text-white transition-all duration-300 group"
+                  className="relative px-4 py-2 dark:text-gray-300 text-gray-700 hover:dark:text-white hover:text-gray-900 transition-all duration-300 group"
                 >
                   <span className="relative z-10">{t("nav.features")}</span>
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-400 to-primary-600 group-hover:w-full transition-all duration-300" />
                 </button>
                 <button
                   onClick={() => scrollToSection("cases")}
-                  className="relative px-4 py-2 text-gray-300 hover:text-white transition-all duration-300 group"
+                  className="relative px-4 py-2 dark:text-gray-300 text-gray-700 hover:dark:text-white hover:text-gray-900 transition-all duration-300 group"
                 >
                   <span className="relative z-10">{t("nav.cases")}</span>
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-400 to-primary-600 group-hover:w-full transition-all duration-300" />
                 </button>
                 <button
                   onClick={() => scrollToSection("configurator")}
-                  className="relative px-4 py-2 text-gray-300 hover:text-white transition-all duration-300 group"
+                  className="relative px-4 py-2 dark:text-gray-300 text-gray-700 hover:dark:text-white hover:text-gray-900 transition-all duration-300 group"
                 >
                   <span className="relative z-10">{t("nav.configurator")}</span>
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-400 to-primary-600 group-hover:w-full transition-all duration-300" />
@@ -165,8 +213,8 @@ export default function Navigation() {
               href="/catalog"
               className={`relative px-4 py-2 transition-all duration-300 group ${
                 pathname === "/catalog"
-                  ? "text-white"
-                  : "text-gray-300 hover:text-white"
+                  ? "dark:text-white text-gray-900"
+                  : "dark:text-gray-300 text-gray-700 hover:dark:text-white hover:text-gray-900"
               }`}
             >
               <span className="relative z-10">{t("nav.catalog")}</span>
@@ -178,8 +226,8 @@ export default function Navigation() {
               href="/about"
               className={`relative px-4 py-2 transition-all duration-300 group ${
                 pathname === "/about"
-                  ? "text-white"
-                  : "text-gray-300 hover:text-white"
+                  ? "dark:text-white text-gray-900"
+                  : "dark:text-gray-300 text-gray-700 hover:dark:text-white hover:text-gray-900"
               }`}
             >
               <span className="relative z-10">{t("nav.about")}</span>
@@ -198,7 +246,7 @@ export default function Navigation() {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden w-10 h-10 flex items-center justify-center text-gray-300 hover:text-white transition-colors"
+            className="md:hidden w-10 h-10 flex items-center justify-center dark:text-gray-300 text-gray-700 hover:dark:text-white hover:text-gray-900 transition-colors"
             aria-label="Menu"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

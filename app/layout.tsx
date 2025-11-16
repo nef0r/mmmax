@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ConfiguratorProvider } from "@/contexts/ConfiguratorContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const inter = Inter({ subsets: ["latin", "cyrillic"], variable: "--font-inter" });
 
@@ -17,13 +18,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className="dark">
+    <html lang="ru" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <LanguageProvider>
-          <ConfiguratorProvider>
-            {children}
-          </ConfiguratorProvider>
-        </LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider>
+            <ConfiguratorProvider>
+              {children}
+            </ConfiguratorProvider>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
