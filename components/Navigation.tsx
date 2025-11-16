@@ -137,50 +137,51 @@ export default function Navigation() {
                 </svg>
               </button>
 
-            {isLanguageMenuOpen && (
-              <>
-                <div
-                  className="fixed inset-0 z-40"
-                  onClick={() => setIsLanguageMenuOpen(false)}
-                />
-                <div className="absolute right-0 mt-2 w-40 rounded-xl glass-effect border border-white/10 shadow-2xl z-50 overflow-hidden">
-                  <button
-                    onClick={() => {
-                      setLanguage("ru");
-                      setIsLanguageMenuOpen(false);
-                    }}
-                    className={`w-full px-4 py-3 text-left hover:bg-white/10 transition-colors flex items-center gap-3 ${
-                      language === "ru" ? "bg-primary-500/20 text-primary-300" : "text-gray-300"
-                    }`}
-                  >
-                    <span className="text-lg">🇷🇺</span>
-                    <span className="font-medium">Русский</span>
-                    {language === "ru" && (
-                      <svg className="w-4 h-4 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    )}
-                  </button>
-                  <button
-                    onClick={() => {
-                      setLanguage("kz");
-                      setIsLanguageMenuOpen(false);
-                    }}
-                    className={`w-full px-4 py-3 text-left hover:bg-white/10 transition-colors flex items-center gap-3 ${
-                      language === "kz" ? "bg-primary-500/20 text-primary-300" : "text-gray-300"
-                    }`}
-                  >
-                    <span className="text-lg">🇰🇿</span>
-                    <span className="font-medium">Қазақша</span>
-                    {language === "kz" && (
-                      <svg className="w-4 h-4 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    )}
-                  </button>
-                </div>
-              </>
-            )}
+              {isLanguageMenuOpen && (
+                <>
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setIsLanguageMenuOpen(false)}
+                  />
+                  <div className="absolute right-0 mt-2 w-40 rounded-xl glass-effect border border-white/10 shadow-2xl z-50 overflow-hidden">
+                    <button
+                      onClick={() => {
+                        setLanguage("ru");
+                        setIsLanguageMenuOpen(false);
+                      }}
+                      className={`w-full px-4 py-3 text-left hover:bg-white/10 transition-colors flex items-center gap-3 ${
+                        language === "ru" ? "bg-primary-500/20 text-primary-300" : "text-gray-300"
+                      }`}
+                    >
+                      <span className="text-lg">🇷🇺</span>
+                      <span className="font-medium">Русский</span>
+                      {language === "ru" && (
+                        <svg className="w-4 h-4 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setLanguage("kz");
+                        setIsLanguageMenuOpen(false);
+                      }}
+                      className={`w-full px-4 py-3 text-left hover:bg-white/10 transition-colors flex items-center gap-3 ${
+                        language === "kz" ? "bg-primary-500/20 text-primary-300" : "text-gray-300"
+                      }`}
+                    >
+                      <span className="text-lg">🇰🇿</span>
+                      <span className="font-medium">Қазақша</span>
+                      {language === "kz" && (
+                        <svg className="w-4 h-4 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
 
           <div className="hidden md:flex items-center space-x-4 lg:space-x-6">
